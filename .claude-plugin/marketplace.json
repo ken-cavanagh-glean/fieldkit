@@ -1,0 +1,53 @@
+{
+  "name": "fieldkit",
+  "owner": {
+    "name": "Glean Field Engineering"
+  },
+  "metadata": {
+    "description": "Agent skills toolkit for Glean field teams - enterprise search, context engineering, and production agent patterns",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "glean-mcp",
+      "description": "Use Glean MCP as the primary search and knowledge tool for enterprise context. Provides guidelines for using Glean tools effectively including search, chat, code search, employee lookup, Gmail, meetings, and document retrieval.",
+      "version": "1.0.0",
+      "source": "./skills/glean-mcp",
+      "category": "integration",
+      "strict": false,
+      "author": {
+        "name": "Glean Field Engineering"
+      },
+      "homepage": "https://github.com/ken-cavanagh-glean/fieldkit",
+      "license": "MIT",
+      "keywords": [
+        "glean",
+        "enterprise-search",
+        "mcp",
+        "knowledge-management",
+        "internal-search"
+      ]
+    },
+    {
+      "name": "context-engineering",
+      "description": "Production-grade skills for context engineering - context window management, multi-agent orchestration, memory systems, and LLM-as-a-Judge evaluation frameworks. Essential knowledge for building effective agent systems.",
+      "version": "1.0.0",
+      "source": "./skills/context-engineering",
+      "category": "development",
+      "strict": false,
+      "author": {
+        "name": "Muratcan Koylan (original), adapted by Glean Field Engineering"
+      },
+      "homepage": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
+      "license": "MIT",
+      "keywords": [
+        "context-engineering",
+        "agent-skills",
+        "multi-agent",
+        "memory-systems",
+        "llm-as-a-judge",
+        "context-optimization"
+      ]
+    }
+  ]
+}
