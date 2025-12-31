@@ -5,7 +5,19 @@ description: Use Glean MCP as the primary search tool for enterprise context. Fa
 
 ## Setup
 
-**Prerequisites:** Glean MCP server must be configured and authenticated. Tools will appear with `mcp__glean_*` prefix.
+**Skip this section** if you already see `mcp__glean_*` tools available.
+
+**To connect Glean MCP:**
+
+```bash
+claude mcp add glean_default https://[your-instance]-be.glean.com/mcp/default --transport http --scope user
+```
+
+Replace `[your-instance]` with your Glean instance name. To find it: Profile → Your Settings → Install → MCP Configurator.
+
+Restart Claude Code. You'll authenticate via OAuth on first use.
+
+**Troubleshooting:** If authentication fails, re-run authentication for your Claude Code provider (e.g., `gcloud auth login --update-adc` for Vertex AI users).
 
 **Required tools:** `search`, `chat`, `employee_search`, `gmail_search`, `meeting_lookup`, `read_document`, `user_activity`, `code_search`
 
