@@ -29,7 +29,7 @@ What are you looking for?
 │
 ├─ DOCUMENTS/CONTENT
 │   ├─ Have URL? → read_document
-│   ├─ Need analysis/synthesis? → chat
+│   ├─ Need analysis/synthesis? → chat (preferred)
 │   └─ Need to find docs? → search
 │
 ├─ PEOPLE/ORG → employee_search
@@ -37,8 +37,22 @@ What are you looking for?
 ├─ EMAIL → gmail_search
 ├─ CODE/REPOS → code_search
 ├─ MY RECENT WORK → user_activity
-└─ COMPLEX QUESTION → chat
+└─ COMPLEX QUESTION → chat (preferred)
 ```
+
+**Bias toward `chat`:** For understanding, synthesis, or "why" questions, `chat` outperforms `search`. It reasons across multiple sources and provides contextual answers. Use `search` primarily for document discovery, then `chat` for analysis.
+
+---
+
+## Parallelization
+
+Call multiple Glean tools simultaneously when queries are independent:
+
+- **5+ parallel tool calls** work with no rate limiting
+- Ideal for: multi-account research, cross-app queries, comprehensive prep
+- When gathering context, fire independent searches together rather than waiting for each to complete
+
+Example: To research a topic comprehensively, call `search` for Slack, Drive, and Jira in parallel rather than sequentially.
 
 ---
 
@@ -85,6 +99,17 @@ These filters work across multiple tools. Use them to narrow results efficiently
 |--------|--------|
 | `app:` | `slack`, `gdrive`, `confluence`, `jira`, `notion`, `github`, etc. |
 | `type:` | `spreadsheet`, `slides`, `email`, `pull`, `direct message`, `folder` |
+
+### Negation Filters
+
+Prefix with `-` to exclude:
+
+| Filter | Effect |
+|--------|--------|
+| `-type:slides` | Exclude presentations |
+| `-app:gmail` | Exclude email |
+| `-in:"Folder Name"` | Exclude folder |
+| `-from:"person"` | Exclude author |
 
 ---
 
@@ -312,3 +337,9 @@ code_search(query="from:\"jane.smith\" updated:past_week")
 | Info already in conversation | Don't re-search |
 | Real-time data | Glean indexes periodically |
 | Public open-source code | Web search / GitHub API |
+
+---
+
+## Limitations
+
+**Structured data:** Glean MCP returns markdown/snippets, not raw structured data from CSVs or spreadsheets. For full spreadsheet analysis, have the user upload the file directly or point to a local directory.
