@@ -15,8 +15,8 @@ When you install a skill:
 
 | Type | Example | What It Does |
 |------|---------|--------------|
-| **Actionable** | `glean-mcp` | Direct guidance: "When X, do Y" - tells Claude which tools to use |
-| **Educational** | `context-engineering` | Conceptual knowledge that shapes how Claude thinks about problems |
+| **Actionable** | `glean-mcp` | Teaches Claude how and when to use Glean tools effectively |
+| **Educational** | `context-engineering` | Shapes how Claude thinks about agent design and debugging |
 
 ## Quick Start
 
