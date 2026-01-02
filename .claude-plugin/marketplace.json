@@ -4,8 +4,8 @@
     "name": "Glean Field Engineering"
   },
   "metadata": {
-    "description": "Agent skills toolkit for Glean field teams - enterprise search, context engineering, and production agent patterns",
-    "version": "1.0.0"
+    "description": "Agent skills toolkit for Glean field teams - enterprise search, context engineering, browser automation, and production agent patterns",
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -47,6 +47,27 @@
         "memory-systems",
         "llm-as-a-judge",
         "context-optimization"
+      ]
+    },
+    {
+      "name": "browser-automation",
+      "description": "Guidance for effective browser automation in Claude Code. Best practices for persistent sessions, DOM inspection, and verification workflows. Complements the dev-browser plugin.",
+      "version": "1.0.0",
+      "source": "./skills/browser-automation",
+      "category": "automation",
+      "strict": false,
+      "author": {
+        "name": "Glean Field Engineering"
+      },
+      "homepage": "https://github.com/ken-cavanagh-glean/fieldkit",
+      "license": "MIT",
+      "keywords": [
+        "browser",
+        "automation",
+        "testing",
+        "verification",
+        "playwright",
+        "dev-browser"
       ]
     }
   ]
