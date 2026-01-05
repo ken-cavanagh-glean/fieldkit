@@ -1,74 +1,37 @@
 {
   "name": "fieldkit",
   "owner": {
-    "name": "Glean Field Engineering"
-  },
-  "metadata": {
-    "description": "Agent skills toolkit for Glean field teams - enterprise search, context engineering, browser automation, and production agent patterns",
-    "version": "1.1.0"
+    "name": "Glean Field Engineering",
+    "email": "kenneth.cavanagh@glean.com"
   },
   "plugins": [
     {
       "name": "glean-mcp",
-      "description": "Use Glean MCP as the primary search and knowledge tool for enterprise context. Provides guidelines for using Glean tools effectively including search, chat, code search, employee lookup, Gmail, meetings, and document retrieval.",
-      "version": "1.0.0",
-      "source": "./skills/glean-mcp",
-      "category": "integration",
+      "source": "./",
+      "description": "Use Glean MCP as the primary search and knowledge tool for enterprise context",
       "strict": false,
-      "author": {
-        "name": "Glean Field Engineering"
-      },
-      "homepage": "https://github.com/ken-cavanagh-glean/fieldkit",
-      "license": "MIT",
-      "keywords": [
-        "glean",
-        "enterprise-search",
-        "mcp",
-        "knowledge-management",
-        "internal-search"
-      ]
+      "keywords": ["glean", "enterprise-search", "mcp", "knowledge-management"],
+      "skills": ["./skills/glean-mcp"]
     },
     {
       "name": "context-engineering",
-      "description": "Production-grade skills for context engineering - context window management, multi-agent orchestration, memory systems, and LLM-as-a-Judge evaluation frameworks. Essential knowledge for building effective agent systems.",
-      "version": "1.0.0",
-      "source": "./skills/context-engineering",
-      "category": "development",
+      "source": "./",
+      "description": "Production-grade skills for context engineering and agent systems",
       "strict": false,
-      "author": {
-        "name": "Muratcan Koylan (original), adapted by Glean Field Engineering"
-      },
-      "homepage": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
-      "license": "MIT",
-      "keywords": [
-        "context-engineering",
-        "agent-skills",
-        "multi-agent",
-        "memory-systems",
-        "llm-as-a-judge",
-        "context-optimization"
-      ]
+      "keywords": ["context-engineering", "agent-skills", "multi-agent", "memory-systems"],
+      "skills": ["./skills/context-engineering"]
     },
     {
       "name": "browser-automation",
-      "description": "Guidance for effective browser automation in Claude Code. Best practices for persistent sessions, DOM inspection, and verification workflows. Complements the dev-browser plugin.",
-      "version": "1.0.0",
-      "source": "./skills/browser-automation",
-      "category": "automation",
+      "source": "./",
+      "description": "Guidance for effective browser automation with dev-browser plugin",
       "strict": false,
-      "author": {
-        "name": "Glean Field Engineering"
-      },
-      "homepage": "https://github.com/ken-cavanagh-glean/fieldkit",
-      "license": "MIT",
-      "keywords": [
-        "browser",
-        "automation",
-        "testing",
-        "verification",
-        "playwright",
-        "dev-browser"
-      ]
+      "keywords": ["browser", "automation", "testing", "dev-browser"],
+      "skills": ["./skills/browser-automation"]
     }
-  ]
+  ],
+  "metadata": {
+    "description": "Agent skills toolkit for Glean field teams",
+    "version": "1.1.0"
+  }
 }
