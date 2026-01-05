@@ -9,15 +9,22 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 ## Installation
 
 ```bash
-# Add fieldkit as a marketplace source
+# 1. Add fieldkit as a marketplace source
 /plugin marketplace add ken-cavanagh-glean/fieldkit
 
-# Install skills
+# 2. Install the skills you want
 /plugin install glean-mcp@fieldkit
 /plugin install context-engineering@fieldkit
+/plugin install browser-automation@fieldkit
+
+# 3. Restart Claude Code to load new skills
 ```
 
-Or copy manually to `~/.claude/skills/` or `.claude/skills/`.
+**For browser-automation**, also install the dev-browser plugin:
+```bash
+/plugin marketplace add sawyerhood/dev-browser
+/plugin install dev-browser@sawyerhood/dev-browser
+```
 
 ## Skills
 
@@ -25,6 +32,7 @@ Or copy manually to `~/.claude/skills/` or `.claude/skills/`.
 |-------|-------------|--------|
 | **glean-mcp** | Teaches Claude how and when to use Glean tools effectively | Glean Field Engineering |
 | **context-engineering** | Educational skill for agent design, debugging, and context management | [Muratcan Koylan](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering) |
+| **browser-automation** | Guidance for effective browser automation with dev-browser | Glean Field Engineering |
 
 ## Adding Skills
 
