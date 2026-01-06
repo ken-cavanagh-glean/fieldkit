@@ -486,8 +486,6 @@ Raw ideas not yet prioritized or specced. Add ideas here first.
 | `glean-sdk` | Development | Teach Claude to use Glean SDK for building integrations, API calls, agent programmatic control |
 | `mcp-server-builder` | Development | Guide for building custom MCP servers |
 | `agent-debugger` | Development | Diagnose why agents aren't returning expected results |
-| `knowledge-graph-navigator` | Research | Explore entity relationships in Glean's knowledge graph |
-| `prompt-engineering` | Development | Best practices for agent instructions in Agent Builder |
 
 ### Adding Ideas
 
