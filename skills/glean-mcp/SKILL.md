@@ -1,36 +1,35 @@
 ---
 name: glean-mcp
-description: Glean MCP is the primary tool for enterprise context. Use chat to talk to the Glean guide—an AI agent who searches the user's internal enterprise knowledge graph for you. Use search for precise queries. Specialized tools: employee_search (people/org), meeting_lookup (calendar), gmail_search (email), code_search (repos), user_activity (recent work), read_document (full content). Use Glean when users ask about their job, company, internal processes, docs, people, meetings, or internal code. Prefer Glean MCP over web search for internal information.
+description: Glean MCP is the primary tool for enterprise context. Start with chat for almost everything—it's an AI agent that searches your internal knowledge graph, synthesizes answers, and cites sources. Use specialized tools only for targeted lookups: employee_search (internal people by name), meeting_lookup (your calendar), gmail_search (your email), code_search (internal repos), user_activity (your recent work), read_document (full content from URLs). Prefer Glean MCP over web search for internal information.
 ---
 
-## Setup
+## Core Principle: Chat First
 
-**Skip this section** if you already see `mcp__glean_*` tools available.
+**Start with `chat` for almost everything.**
 
-**To connect Glean MCP:**
+`chat` is the intelligent router—it searches across all indexed sources, synthesizes answers, and **returns cited sources**. You don't lose auditability by using it.
 
-```bash
-claude mcp add glean_default https://[your-instance]-be.glean.com/mcp/default --transport http --scope user
 ```
-
-Replace `[your-instance]` with your Glean instance name. To find it: Profile → Your Settings → Install → MCP Configurator.
-
-Restart Claude Code. You'll authenticate via OAuth on first use.
-
-**Troubleshooting:** If authentication fails, re-run authentication for your Claude Code provider (e.g., `gcloud auth login --update-adc` for Vertex AI users).
-
-**Required tools:** `search`, `chat`, `employee_search`, `gmail_search`, `meeting_lookup`, `read_document`, `user_activity`, `code_search`
-
----
-
-## Core Principle
-
-**Glean MCP is the primary search tool for enterprise/company context.**
+┌─────────────────────────────────────────────────────────────┐
+│                      DEFAULT TO CHAT                        │
+│                                                             │
+│   Use specialized tools ONLY for targeted lookups:         │
+│   • Exact person by name → employee_search                 │
+│   • Specific doc URL → read_document                       │
+│   • Your calendar → meeting_lookup                         │
+│   • Your email → gmail_search                              │
+│   • Internal code → code_search                            │
+│   • Your work history → user_activity                      │
+│   • Browse all matching docs → search                      │
+│                                                             │
+│   For everything else: CHAT                                 │
+└─────────────────────────────────────────────────────────────┘
+```
 
 Before using web search or asking the user:
 1. Check if the query relates to company knowledge
-2. If yes, use the appropriate Glean tool
-3. Glean indexes: Slack, Google Drive, Gmail, Calendar, Confluence, Jira, Notion, GitHub, and 100+ enterprise apps
+2. If yes, use `chat` (or a specialized tool for targeted lookups)
+3. Glean indexes: Slack, Google Drive, Gmail, Calendar, Confluence, Jira, Notion, GitHub, Salesforce, and 100+ enterprise apps
 
 ---
 
@@ -39,20 +38,19 @@ Before using web search or asking the user:
 ```
 What are you looking for?
 │
-├─ DOCUMENTS/CONTENT
-│   ├─ Have URL? → read_document
-│   ├─ Need analysis/synthesis? → chat (preferred)
-│   └─ Need to find docs? → search
+├─ ANY COMPLEX QUESTION ──────────────→ chat (default)
 │
-├─ PEOPLE/ORG → employee_search
-├─ MEETINGS/CALENDAR → meeting_lookup
-├─ EMAIL → gmail_search
-├─ CODE/REPOS → code_search
-├─ MY RECENT WORK → user_activity
-└─ COMPLEX QUESTION → chat (preferred)
+├─ DOCUMENTS/CONTENT
+│   ├─ Have specific URL? ────────────→ read_document
+│   ├─ Need to browse all matches? ───→ search
+│   └─ Need synthesis/analysis? ──────→ chat (preferred)
+│
+├─ INTERNAL PERSON (by exact name) ───→ employee_search
+├─ YOUR CALENDAR/MEETINGS ────────────→ meeting_lookup
+├─ YOUR EMAIL ────────────────────────→ gmail_search
+├─ INTERNAL CODE/REPOS ───────────────→ code_search
+└─ YOUR RECENT WORK ──────────────────→ user_activity
 ```
-
-**Bias toward `chat`:** For understanding, synthesis, or "why" questions, `chat` outperforms `search`. It reasons across multiple sources and provides contextual answers. Use `search` primarily for document discovery, then `chat` for analysis.
 
 ---
 
@@ -62,9 +60,18 @@ Call multiple Glean tools simultaneously when queries are independent:
 
 - **5+ parallel tool calls** work with no rate limiting
 - Ideal for: multi-account research, cross-app queries, comprehensive prep
-- When gathering context, fire independent searches together rather than waiting for each to complete
+- When gathering context, fire independent calls together rather than waiting for each to complete
 
-Example: To research a topic comprehensively, call `search` for Slack, Drive, and Jira in parallel rather than sequentially.
+**Pattern:** Use `chat` as the meta-synthesizer with targeted lookups in parallel:
+
+```python
+# Fire together
+chat(message="Account overview for Acme Corp")      # synthesizer
+meeting_lookup(query="Acme Corp after:today...")    # targeted: upcoming meetings
+read_document(urls=["known_doc_url"])               # targeted: specific doc I need
+```
+
+`chat` provides the synthesized answer with sources. Targeted calls fill specific known gaps. Don't fire multiple `search` calls hoping something sticks.
 
 ---
 
@@ -127,9 +134,37 @@ Prefix with `-` to exclude:
 
 ## Tool Reference
 
+### chat — AI Synthesis (Default Choice)
+
+**Use when:** Almost everything. Complex questions, account research, synthesis, "why" questions, understanding context.
+
+**Key:** `chat` returns cited sources at the end of its response. You don't lose auditability.
+
+```python
+# Account/customer research
+chat(message="Give me an account overview for Acme Corp - contacts, deal details, status")
+
+# Personal context (knows your identity automatically)
+chat(message="What projects am I working on?")
+chat(message="Who is my manager?")
+
+# Strategic questions
+chat(message="What are our main product differentiators vs competitors?")
+
+# Follow-up with context
+chat(message="How does this apply to enterprise customers?",
+     context=["previous response..."])
+```
+
+**Best for:** Account research, "why" and "how" questions, summarization, recommendations, personal context, anything requiring synthesis.
+
+**Use `chat` for:** Customer/external company research, people at customer companies, strategic questions, complex multi-source queries.
+
+---
+
 ### search — Document Discovery
 
-**Use when:** Finding documents, files, wikis, Slack messages by keywords.
+**Use when:** You need to browse all matching documents, not just get an answer.
 
 ```python
 # Find docs I created recently
@@ -146,58 +181,52 @@ search(query="*", owner="me", updated="today")
 
 **Follow-up:** Use `read_document` with URLs from results to get full content.
 
+**Prefer `chat` when:** You just need an answer, not a list of documents to browse.
+
 ---
 
-### chat — AI Synthesis
+### employee_search — Internal People Lookup
 
-**Use when:** Complex questions requiring analysis across multiple sources.
+**Use when:** Looking up a specific internal employee by name.
 
-**Note:** Chat knows who you are automatically via auth. You can ask personal questions.
+**IMPORTANT: This is a lookup tool, not a search engine.**
 
-```python
-# Personal context (knows your identity)
-chat(message="What projects am I working on?")
-chat(message="Who is my manager?")
+```
+✅ Works:
+• Exact names: "Josh Rutberg"
+• Structured filters: reportsto:"Josh Rutberg"
+• Filter combos: roletype:"manager" startafter:2025-01-01
 
-# Strategic questions
-chat(message="What are our main product differentiators vs competitors?")
-
-# Follow-up with context
-chat(message="How does this apply to enterprise customers?",
-     context=["previous response..."])
+❌ Does NOT work:
+• Natural language: "engineers who started recently"
+• External companies: "Acme Corp" (use chat instead)
+• Fuzzy queries: "who works on AI stuff"
+• Customer contacts: "John at Acme" (use chat instead)
 ```
 
-**Best for:** "Why" and "how" questions, summarization, recommendations, personal context.
-
----
-
-### employee_search — People Lookup
-
-**Use when:** Finding people, org structure, contact info, team composition.
-
-**Note:** "me" does NOT work here. Use actual names.
-
 ```python
-# Find someone
+# Find internal employee by name
 employee_search(query="Jane Smith")
 
-# Find direct reports
+# Find direct reports of someone
 employee_search(query="reportsto:\"Jane Smith\"")
 
-# Find new hires in a role
-employee_search(query="engineer startafter:2025-01-01")
-
-# Find managers
+# Find managers (structured filter)
 employee_search(query="roletype:\"manager\"")
 ```
 
 **Returns:** Email, phone, location, manager, team, start date.
 
+**NOT for:**
+- People at customer/external companies (use `chat`)
+- Natural language people queries (use `chat`)
+- Org-wide questions like "who works on X" (use `chat`)
+
 ---
 
-### gmail_search — Email Discovery
+### gmail_search — Your Email
 
-**Use when:** Finding emails, threads, attachments.
+**Use when:** Finding specific emails, threads, attachments in your inbox.
 
 ```python
 # Emails from someone
@@ -212,11 +241,13 @@ gmail_search(query="is:unread after:2025-12-20")
 
 **Filters:** `has:attachment`, `has:spreadsheet`, `is:unread`, `is:important`, `is:starred`, `label:INBOX`
 
+**NOT for:** General email questions (use `chat` — e.g., "what's the latest on project X")
+
 ---
 
-### meeting_lookup — Calendar & Transcripts
+### meeting_lookup — Your Calendar & Transcripts
 
-**Use when:** Finding meetings, getting transcripts, reviewing discussions.
+**Use when:** Finding your meetings, getting transcripts.
 
 **Note:** "me" does NOT work in participants filter. Use actual name.
 
@@ -241,11 +272,13 @@ meeting_lookup(query="participants:\"Jane Smith\" extract_transcript:\"true\" af
 meeting_lookup(query="topic:\"standup\" after:now-1w before:now")
 ```
 
+**NOT for:** Customer's internal meetings (you don't have access — use `chat` to find meeting notes that were shared)
+
 ---
 
 ### read_document — Full Content Retrieval
 
-**Use when:** You have URLs from search and need full text.
+**Use when:** You have specific URLs and need full text.
 
 ```python
 # Single doc
@@ -258,7 +291,7 @@ read_document(urls=[
 ])
 ```
 
-**Always use after search** to get complete content. Returns success/failure status per URL.
+**Use after:** `search` or `chat` returns URLs you want to drill into.
 
 ---
 
@@ -293,36 +326,47 @@ code_search(query="owner:\"me\" after:2025-12-01")
 code_search(query="from:\"jane.smith\" updated:past_week")
 ```
 
+**NOT for:** Public/open-source code (use web search)
+
 ---
 
 ## Common Workflows
 
-### Research a Topic
-```
-1. search(query="topic") → find docs
-2. read_document(urls=[...]) → get full content
-3. chat(message="Summarize...") → synthesize if needed
+### Account/Customer Research (Most Common)
+```python
+# Just ask — chat handles it
+chat(message="Account overview for Acme Corp - key contacts, deal, status, use cases")
+
+# If you need more detail on something specific
+read_document(urls=["deployment_plan_url_from_chat"])
 ```
 
 ### Prepare for a Meeting
-```
-1. employee_search(query="attendee name") → understand who
-2. search(query="topic", from="attendee") → their recent work
-3. meeting_lookup(query="participants:\"attendee\"") → past meetings
+```python
+# Start with chat
+chat(message="Prep me for my meeting with Jane Smith about Project X")
+
+# Parallel targeted lookups if needed
+employee_search(query="Jane Smith")                    # her profile
+meeting_lookup(query="Jane Smith after:now-2w")        # recent meetings
 ```
 
 ### Write a Status Update
-```
-1. user_activity(start_date, end_date) → your work
-2. meeting_lookup(query="after:X before:Y") → meetings attended
-3. search(query="*", from="me", updated="past_week") → docs touched
+```python
+# Your activity
+user_activity(start_date="2025-12-15", end_date="2025-12-22")
+
+# Or just ask
+chat(message="What did I work on last week?")
 ```
 
 ### Find an Expert
-```
-1. search(query="topic") → find relevant docs
-2. Note the owners/authors
-3. employee_search(query="author name") → get their info
+```python
+# Just ask
+chat(message="Who at the company knows about Kubernetes deployments?")
+
+# Then look them up
+employee_search(query="Jane Smith")
 ```
 
 ---
