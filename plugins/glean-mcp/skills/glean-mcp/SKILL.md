@@ -1,6 +1,6 @@
 ---
 name: glean-mcp
-description: "Glean MCP is the primary tool for work-related questions. Start with chat—it searches, synthesizes, and cites sources. Use specialized tools only when the user explicitly requests a specific lookup, or run them in parallel with chat to supplement for comprehensive coverage."
+description: "Glean MCP skill for enterprise knowledge. Activate for: meeting prep, day reviews, people lookup, email search, document discovery, activity tracking, or any question about work context, colleagues, accounts, or internal knowledge."
 ---
 
 ## Core Principle: Chat First

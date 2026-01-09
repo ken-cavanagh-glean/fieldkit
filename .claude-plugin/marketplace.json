@@ -8,7 +8,7 @@
     {
       "name": "glean-mcp",
       "source": "./plugins/glean-mcp",
-      "description": "Glean MCP is the primary tool for enterprise context. Start with chat for synthesis; use specialized tools only when explicitly requested or in parallel to supplement.",
+      "description": "Glean MCP skill for enterprise knowledge. Activate for: meeting prep, day reviews, people lookup, email search, document discovery, activity tracking, or any question about work context, colleagues, accounts, or internal knowledge.",
       "strict": false,
       "keywords": ["glean", "enterprise-search", "mcp", "knowledge-management"],
       "skills": ["./skills/glean-mcp"]
@@ -32,6 +32,6 @@
   ],
   "metadata": {
     "description": "Agent skills toolkit for Glean field teams",
-    "version": "1.3.4"
+    "version": "2.0.0"
   }
 }

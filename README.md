@@ -46,6 +46,17 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 ## Changelog
 
+### v2.0.0 (2026-01-08)
+
+**Breaking change: Skill trigger mechanism overhaul**
+
+- Rewrote skill description from procedural guidance to explicit trigger patterns
+- Skills are now opt-in: only `name` + `description` pre-loaded at startup; full SKILL.md loads when triggered
+- New description activates on: meeting prep, day reviews, people lookup, email search, document discovery, activity tracking, and work context questions
+- Reframed from "enterprise search" to "enterprise knowledge" — reflects inference over the graph, not just retrieval
+
+**Why v2.0:** This fundamentally changes how the skill gets invoked. Previous versions assumed the skill was always loaded; now we optimize for the progressive disclosure model.
+
 ### v1.3.4 (2026-01-08)
 
 - Expanded routing examples to show full parallel tool combinations
