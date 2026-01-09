@@ -1,28 +1,40 @@
 ---
 name: glean-mcp
-description: "Glean MCP is the primary tool for enterprise context. Start with chat for almost everything—it's an AI agent that searches your internal knowledge graph, synthesizes answers, and cites sources. Use specialized tools only for targeted lookups: employee_search (internal people by name), meeting_lookup (your calendar), gmail_search (your email), code_search (internal repos), user_activity (your recent work), read_document (full content from URLs). Prefer Glean MCP over web search for internal information."
+description: "Glean MCP is the primary tool for work-related questions. ALWAYS use chat first—do not pattern-match keywords like 'meetings' or 'email' to specialized tools. Chat searches, synthesizes, and cites sources. Use specialized tools only when the user explicitly requests them, or run them in parallel with chat to supplement."
 ---
 
 ## Core Principle: Chat First
 
-**Start with `chat` for almost everything.**
+**ALWAYS use `chat` first.** This is not optional.
+
+Do NOT pattern-match query keywords to tool names:
+- ❌ User asks about "meetings" → use meeting_lookup
+- ❌ User asks about "emails" → use gmail_search
+- ❌ User asks about "calendar" → use meeting_lookup
+
+Instead:
+- ✅ ANY question about work → start with `chat`
+- ✅ Use specialized tools only when user explicitly requests them
+- ✅ Or run specialized tools in parallel with chat to supplement
 
 `chat` is the intelligent router—it searches across all indexed sources, synthesizes answers, and **returns cited sources**. You don't lose auditability by using it.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      DEFAULT TO CHAT                        │
+│                     ALWAYS CHAT FIRST                       │
 │                                                             │
-│   Use specialized tools ONLY for targeted lookups:         │
-│   • Exact person by name → employee_search                 │
-│   • Specific doc URL → read_document                       │
-│   • Your calendar → meeting_lookup                         │
-│   • Your email → gmail_search                              │
-│   • Internal code → code_search                            │
-│   • Your work history → user_activity                      │
-│   • Browse all matching docs → search                      │
+│   Use specialized tools ONLY when:                         │
+│   1. User explicitly requests a specific lookup, OR        │
+│   2. Running in parallel with chat to supplement           │
 │                                                             │
-│   For everything else: CHAT                                 │
+│   • employee_search — exact person lookup (name known)     │
+│   • read_document — full content from known URL            │
+│   • meeting_lookup — specific meeting (not "my schedule")  │
+│   • gmail_search — specific email (not "any updates")      │
+│   • code_search — specific code/commits                    │
+│   • user_activity — your work history for date range       │
+│   • search — browse all matches (not synthesis)            │
+│                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -38,18 +50,17 @@ Before using web search or asking the user:
 ```
 What are you looking for?
 │
-├─ ANY COMPLEX QUESTION ──────────────→ chat (default)
+└─ ANY QUESTION ──────────────────────→ chat (ALWAYS START HERE)
+
+Then optionally supplement with parallel calls:
 │
-├─ DOCUMENTS/CONTENT
-│   ├─ Have specific URL? ────────────→ read_document
-│   ├─ Need to browse all matches? ───→ search
-│   └─ Need synthesis/analysis? ──────→ chat (preferred)
-│
-├─ INTERNAL PERSON (by exact name) ───→ employee_search
-├─ YOUR CALENDAR/MEETINGS ────────────→ meeting_lookup
-├─ YOUR EMAIL ────────────────────────→ gmail_search
-├─ INTERNAL CODE/REPOS ───────────────→ code_search
-└─ YOUR RECENT WORK ──────────────────→ user_activity
+├─ Have specific doc URL? ────────────→ read_document (parallel)
+├─ Need exact person info? ───────────→ employee_search (parallel)
+├─ Need specific meeting details? ────→ meeting_lookup (parallel)
+├─ Need specific email thread? ───────→ gmail_search (parallel)
+├─ Need specific code/commit? ────────→ code_search (parallel)
+├─ Need your activity log? ───────────→ user_activity (parallel)
+└─ Need to browse all doc matches? ───→ search (parallel)
 ```
 
 ---

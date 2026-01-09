@@ -46,6 +46,13 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 ## Changelog
 
+### v1.2.0 (2026-01-08)
+
+- **Chat-first enforcement:** Rewrote SKILL.md to make chat-first mandatory, not suggested
+- Added explicit "do NOT pattern-match" examples (e.g., "meetings" → meeting_lookup)
+- Clarified specialized tools for explicit user requests OR parallel supplementation
+- Updated Tool Selection flow to always start with chat
+
 ### v1.1.2 (2026-01-08)
 
 - Improved marketplace.json description to clarify chat-first behavior and parallel tool usage
