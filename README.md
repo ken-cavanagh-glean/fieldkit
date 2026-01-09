@@ -46,7 +46,13 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 ## Changelog
 
-### v2.0.0 (2026-01-07) — Breaking Changes
+### v1.1.1 (2026-01-08)
+
+- Fixed plugin isolation issue where skills cross-contaminated between plugins
+- Fixed YAML parsing error in glean-mcp description (unquoted colons)
+- Improved marketplace.json description to encourage frequent Glean usage
+
+### v1.1.0 (2026-01-07)
 
 **glean-mcp skill rewrite:**
 
@@ -58,6 +64,6 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 **Migration:** If you have workflows that default to `search`, they'll still work but may be suboptimal. Prefer `chat` for synthesis/analysis, use `search` only when you need to browse all matching documents.
 
-### v1.x (2025-12-xx)
+### v1.0.0 (2025-12-xx)
 
 Initial release with glean-mcp, context-engineering, and browser-automation skills.
