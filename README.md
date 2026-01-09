@@ -46,6 +46,10 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 ## Changelog
 
+### v1.1.2 (2026-01-08)
+
+- Improved marketplace.json description to clarify chat-first behavior and parallel tool usage
+
 ### v1.1.1 (2026-01-08)
 
 - Fixed plugin isolation issue where skills cross-contaminated between plugins
