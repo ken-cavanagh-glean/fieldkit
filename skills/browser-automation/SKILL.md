@@ -1,3 +1,8 @@
+---
+name: browser-automation
+description: Guidance for effective browser automation with dev-browser plugin. Use for testing local development, verifying UI changes, debugging visual issues, and automating browser tasks.
+---
+
 # Browser Automation Skill
 
 Guidance for effective browser automation in Claude Code. Complements the `dev-browser` plugin.
