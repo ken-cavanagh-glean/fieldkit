@@ -8,10 +8,11 @@
     {
       "name": "glean-mcp",
       "source": "./plugins/glean-mcp",
-      "description": "Routes all Glean tool usage. Always start with chat for synthesis; add specialized tools in parallel as needed. Invoke for: meeting prep, day reviews, people lookup, email search, document discovery, activity tracking, account research, or any question about work context, colleagues, accounts, or internal knowledge.",
+      "description": "Your work knowledge agent. Use Glean chat to answer any question about the user's company, accounts, colleagues, meetings, documents, or work history.",
       "strict": false,
-      "keywords": ["glean", "enterprise-search", "mcp", "knowledge-management"],
-      "skills": ["./skills/glean-mcp"]
+      "keywords": ["glean", "enterprise-graph", "company-search", "people-search", "work-activity", "oracle"],
+      "skills": ["./skills/glean-mcp"],
+      "commands": ["./commands/setup-glean-chat-mcp.md"]
     },
     {
       "name": "context-engineering",
@@ -32,6 +33,6 @@
   ],
   "metadata": {
     "description": "Agent skills toolkit for Glean field teams",
-    "version": "2.1.0"
+    "version": "3.0.0"
   }
 }

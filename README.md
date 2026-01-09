@@ -2,7 +2,7 @@
 
 Agent skills toolkit for Glean field teams.
 
-**Current Version:** 2.2.0
+**Current Version:** 3.0.0
 
 ## What Are Skills?
 
@@ -32,7 +32,7 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 | Skill | Description | Credit |
 |-------|-------------|--------|
-| **glean-mcp** | Teaches Claude how and when to use Glean tools effectively | Glean Field Engineering |
+| **glean-mcp** | Your work knowledge agent — ask Glean about company, accounts, colleagues, meetings, docs | Glean Field Engineering |
 | **context-engineering** | Educational skill for agent design, debugging, and context management | [Muratcan Koylan](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering) |
 | **browser-automation** | Guidance for effective browser automation with dev-browser | Glean Field Engineering |
 
@@ -45,6 +45,26 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 ---
 
 ## Changelog
+
+### v3.0.0 (2026-01-09)
+
+**Breaking change: Chat-only oracle mode**
+
+This release fundamentally reimagines glean-mcp as a "Work Knowledge Agent" — an oracle for enterprise knowledge. Instead of teaching Claude to route between 7+ specialized tools, we now focus entirely on `chat` as the single interface.
+
+**What changed:**
+- **Rewrote SKILL.md** from 450 → 240 lines, focused on chat-only usage
+- **New framing:** "Ask Glean" as a second-brain / oracle pattern (inspired by [steipete/oracle](https://github.com/steipete/oracle))
+- **Removed tool routing:** No more specialized tools (search, email, meetings, etc.) — Glean orchestrates those under the hood
+- **Removed hooks:** No longer enforcing chat-first routing (not needed when chat is the only tool)
+- **New command:** `/setup-glean-chat-mcp` helps users configure the chat-only MCP server
+- **Updated keywords:** `glean`, `enterprise-graph`, `company-search`, `people-search`, `work-activity`, `oracle`
+
+**Why v3.0:** This is a philosophical shift. Previous versions taught Claude to be a Glean power user (pick the right tool). v3 treats Glean as an intelligent agent you simply ask questions to. Simpler, more reliable, better aligned with how Glean chat actually works.
+
+**Migration:** If you have the full Glean MCP (with all tools), this skill still works — it just won't teach Claude about the specialized tools. For best results, switch to the chat-only MCP using `/setup-glean-chat-mcp`.
+
+---
 
 ### v2.2.0 (2026-01-09)
 
