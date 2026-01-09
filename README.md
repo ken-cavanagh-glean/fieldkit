@@ -2,7 +2,7 @@
 
 Agent skills toolkit for Glean field teams.
 
-**Current Version:** 2.0.0
+**Current Version:** 2.1.0
 
 ## What Are Skills?
 
@@ -45,6 +45,13 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 ---
 
 ## Changelog
+
+### v2.1.0 (2026-01-08)
+
+- Added "Always start with chat" behavioral instruction to description
+- Description now encodes routing behavior, not just activation triggers
+- Positions skill as router: "Routes all Glean tool usage"
+- Fixes issue where Claude skipped skill loading because MCP instructions felt sufficient
 
 ### v2.0.0 (2026-01-08)
 

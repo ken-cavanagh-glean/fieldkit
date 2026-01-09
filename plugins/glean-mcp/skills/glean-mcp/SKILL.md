@@ -1,6 +1,6 @@
 ---
 name: glean-mcp
-description: "Glean MCP skill for enterprise knowledge. Activate for: meeting prep, day reviews, people lookup, email search, document discovery, activity tracking, or any question about work context, colleagues, accounts, or internal knowledge."
+description: "Routes all Glean tool usage. Always start with chat for synthesis; add specialized tools in parallel as needed. Invoke for: meeting prep, day reviews, people lookup, email search, document discovery, activity tracking, account research, or any question about work context, colleagues, accounts, or internal knowledge."
 ---
 
 ## Core Principle: Chat First

@@ -8,7 +8,7 @@
     {
       "name": "glean-mcp",
       "source": "./plugins/glean-mcp",
-      "description": "Glean MCP skill for enterprise knowledge. Activate for: meeting prep, day reviews, people lookup, email search, document discovery, activity tracking, or any question about work context, colleagues, accounts, or internal knowledge.",
+      "description": "Routes all Glean tool usage. Always start with chat for synthesis; add specialized tools in parallel as needed. Invoke for: meeting prep, day reviews, people lookup, email search, document discovery, activity tracking, account research, or any question about work context, colleagues, accounts, or internal knowledge.",
       "strict": false,
       "keywords": ["glean", "enterprise-search", "mcp", "knowledge-management"],
       "skills": ["./skills/glean-mcp"]
@@ -32,6 +32,6 @@
   ],
   "metadata": {
     "description": "Agent skills toolkit for Glean field teams",
-    "version": "2.0.0"
+    "version": "2.1.0"
   }
 }
