@@ -1,23 +1,42 @@
 ---
 name: glean-mcp
-description: "Glean MCP is the primary tool for work-related questions. ALWAYS use chat first—do not pattern-match keywords like 'meetings' or 'email' to specialized tools. Chat searches, synthesizes, and cites sources. Use specialized tools only when the user explicitly requests them, or run them in parallel with chat to supplement."
+description: "Glean MCP is the primary tool for work-related questions. Start with chat—it searches, synthesizes, and cites sources. Use specialized tools only when the user explicitly requests a specific lookup, or run them in parallel with chat to supplement for comprehensive coverage."
 ---
 
 ## Core Principle: Chat First
 
-**ALWAYS use `chat` first.** This is not optional.
-
-Do NOT pattern-match query keywords to tool names:
-- ❌ User asks about "meetings" → use meeting_lookup
-- ❌ User asks about "emails" → use gmail_search
-- ❌ User asks about "calendar" → use meeting_lookup
-
-Instead:
-- ✅ ANY question about work → start with `chat`
-- ✅ Use specialized tools only when user explicitly requests them
-- ✅ Or run specialized tools in parallel with chat to supplement
+**Default to `chat` for work-related questions.**
 
 `chat` is the intelligent router—it searches across all indexed sources, synthesizes answers, and **returns cited sources**. You don't lose auditability by using it.
+
+### When to Use Specialized Tools
+
+Specialized tools are appropriate in two cases:
+
+1. **User explicitly requests them** — e.g., "look up Jane Smith's contact info" → `employee_search`
+2. **Running in parallel with chat** — to supplement with targeted data
+
+### The Anti-Pattern
+
+Do NOT skip chat by pattern-matching query keywords to tool names:
+- ❌ "What meetings do I have?" → meeting_lookup
+- ❌ "Any emails I missed?" → gmail_search
+- ❌ "What did I work on?" → user_activity
+
+These questions need synthesis. Start with `chat`.
+
+### Parallel Pattern
+
+For comprehensive coverage, use `chat` as the primary synthesizer with targeted lookups in parallel:
+
+```python
+# Fire together
+chat(message="Prep me for my Acme meeting")        # primary: synthesis
+meeting_lookup(query="Acme after:now-1w")          # supplement: recent meetings
+employee_search(query="Jane Smith")                # supplement: contact info
+```
+
+`chat` provides the synthesized answer. Parallel calls fill specific gaps.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -256,13 +275,14 @@ gmail_search(query="is:unread after:2025-12-20")
 
 ---
 
-### meeting_lookup — Your Calendar & Transcripts
+### meeting_lookup — Your Calendar Events
 
-**Use when:** Finding your meetings, getting transcripts.
+**Use when:** Finding calendar events (not transcripts—use `search` for those).
 
-**Note:** "me" does NOT work in participants filter. Use actual name.
-
-**Important:** Date ranges are non-inclusive. Buffer both sides:
+**Critical Syntax Notes:**
+- "me" does NOT work in participants filter → use actual name
+- Date math (`now-1w`, `today-1d`) is **unreliable** → use `yesterday`, `today`, or `YYYY-MM-DD`
+- Date ranges are non-inclusive → buffer both sides
 
 ```python
 # CORRECT - meetings on Dec 22
@@ -270,17 +290,21 @@ meeting_lookup(query="after:2025-12-21 before:2025-12-23")
 
 # WRONG - returns nothing
 meeting_lookup(query="after:2025-12-22 before:2025-12-22")
+
+# Today's remaining meetings (use explicit keywords, not date math)
+meeting_lookup(query="after:today before:tomorrow")
+
+# Past meetings with specific person
+meeting_lookup(query="participants:\"Jane Smith\" after:yesterday before:today")
 ```
 
+**For transcripts/notes, use `search` instead:**
 ```python
-# Today's remaining meetings
-meeting_lookup(query="after:now before:tomorrow")
+# Gemini meeting notes
+search(query="project kickoff", app="gdrive", in="Meet Recordings")
 
-# Past meetings with transcripts
-meeting_lookup(query="participants:\"Jane Smith\" extract_transcript:\"true\" after:now-2w")
-
-# Topic search
-meeting_lookup(query="topic:\"standup\" after:now-1w before:now")
+# Gong call recordings
+search(query="Acme Corp", app="gong")
 ```
 
 **NOT for:** Customer's internal meetings (you don't have access — use `chat` to find meeting notes that were shared)
@@ -310,12 +334,14 @@ read_document(urls=[
 
 **Use when:** Finding what you worked on. Automatically uses your auth—no name needed.
 
+**Critical:** `end_date` is **exclusive**—add 1 day buffer to include the target date.
+
 ```python
-# Last week's activity
+# Activity for Dec 15-21 (end_date exclusive, so use 22 to include 21)
 user_activity(start_date="2025-12-15", end_date="2025-12-22")
 
-# This month
-user_activity(start_date="2025-12-01", end_date="2025-12-24")
+# Activity for today (end_date must be tomorrow)
+user_activity(start_date="2025-12-24", end_date="2025-12-25")
 ```
 
 **Use cases:** Weekly summaries, 1:1 prep, finding forgotten docs, tracking collaborators.

@@ -8,7 +8,7 @@
     {
       "name": "glean-mcp",
       "source": "./plugins/glean-mcp",
-      "description": "Glean MCP is the primary tool for work-related questions—accounts, people, docs, emails, meetings, internal knowledge. Chat is the default entry point that searches, synthesizes, and cites sources; run specialized tools in parallel with chat to supplement for targeted lookups.",
+      "description": "Glean MCP is the primary tool for enterprise context. Start with chat for synthesis; use specialized tools only when explicitly requested or in parallel to supplement.",
       "strict": false,
       "keywords": ["glean", "enterprise-search", "mcp", "knowledge-management"],
       "skills": ["./skills/glean-mcp"]
@@ -32,6 +32,6 @@
   ],
   "metadata": {
     "description": "Agent skills toolkit for Glean field teams",
-    "version": "1.2.0"
+    "version": "1.3.1"
   }
 }

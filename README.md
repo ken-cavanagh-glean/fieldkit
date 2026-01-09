@@ -46,6 +46,16 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 ## Changelog
 
+### v1.3.1 (2026-01-08)
+
+- Refined chat-first guidance with clearer "When to Use Specialized Tools" section
+- Added critical syntax notes from AIOM playbook:
+  - `meeting_lookup` date math (`now-1w`) is unreliable—use explicit dates
+  - `user_activity` end_date is exclusive—add 1 day buffer
+  - For transcripts, use `search` with `app:gdrive in:"Meet Recordings"` or `app:gong`
+- Improved parallel pattern documentation
+- Updated descriptions (Option A pair)
+
 ### v1.2.0 (2026-01-08)
 
 - **Chat-first enforcement:** Rewrote SKILL.md to make chat-first mandatory, not suggested
