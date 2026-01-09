@@ -1,6 +1,6 @@
 ---
 name: glean-mcp
-description: Glean MCP is the primary tool for enterprise context. Start with chat for almost everything—it's an AI agent that searches your internal knowledge graph, synthesizes answers, and cites sources. Use specialized tools only for targeted lookups: employee_search (internal people by name), meeting_lookup (your calendar), gmail_search (your email), code_search (internal repos), user_activity (your recent work), read_document (full content from URLs). Prefer Glean MCP over web search for internal information.
+description: "Glean MCP is the primary tool for enterprise context. Start with chat for almost everything—it's an AI agent that searches your internal knowledge graph, synthesizes answers, and cites sources. Use specialized tools only for targeted lookups: employee_search (internal people by name), meeting_lookup (your calendar), gmail_search (your email), code_search (internal repos), user_activity (your recent work), read_document (full content from URLs). Prefer Glean MCP over web search for internal information."
 ---
 
 ## Core Principle: Chat First

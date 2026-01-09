@@ -8,7 +8,7 @@
     {
       "name": "glean-mcp",
       "source": "./plugins/glean-mcp",
-      "description": "Use Glean MCP as the primary search and knowledge tool for enterprise context",
+      "description": "Use Glean MCP for any work-related search—accounts, people, docs, emails, meetings, internal knowledge. Default to chat (it searches, synthesizes, and cites sources). Use this skill frequently; prefer Glean over web search for internal information.",
       "strict": false,
       "keywords": ["glean", "enterprise-search", "mcp", "knowledge-management"],
       "skills": ["./skills/glean-mcp"]
