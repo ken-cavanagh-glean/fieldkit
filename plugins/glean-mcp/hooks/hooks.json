@@ -1,17 +1,4 @@
 {
-  "description": "Enforce chat-first routing for Glean MCP tools",
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "mcp__glean_default__(search|user_activity|meeting_lookup|employee_search|gmail_search|code_search|read_document)",
-        "hooks": [
-          {
-            "type": "prompt",
-            "prompt": "You are about to use a specialized Glean tool without using chat first. The chat tool synthesizes across the enterprise graph and should be the PRIMARY tool for work-related questions.\n\nBefore allowing this tool, ask yourself:\n1. Did I already call chat for this query? If yes, this specialized tool is fine as a parallel supplement.\n2. If I haven't called chat, should I be using chat as my primary tool and adding this as a parallel call?\n\nIf chat should be used first, return: {\"decision\": \"deny\", \"reason\": \"Use chat as primary tool. You can call this specialized tool in parallel with chat.\"}\n\nIf chat was already called or this is a valid parallel supplement, return: {\"decision\": \"allow\"}",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  }
+  "description": "Glean MCP hooks (chat-only mode)",
+  "hooks": {}
 }
