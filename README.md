@@ -46,6 +46,11 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 ## Changelog
 
+### v1.3.2 (2026-01-08)
+
+- Added "Review my day" to anti-pattern examples
+- Added day review example in parallel pattern section
+
 ### v1.3.1 (2026-01-08)
 
 - Refined chat-first guidance with clearer "When to Use Specialized Tools" section

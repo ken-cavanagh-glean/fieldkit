@@ -22,6 +22,7 @@ Do NOT skip chat by pattern-matching query keywords to tool names:
 - ❌ "What meetings do I have?" → meeting_lookup
 - ❌ "Any emails I missed?" → gmail_search
 - ❌ "What did I work on?" → user_activity
+- ❌ "Review my day" → user_activity + meeting_lookup
 
 These questions need synthesis. Start with `chat`.
 
@@ -30,9 +31,13 @@ These questions need synthesis. Start with `chat`.
 For comprehensive coverage, use `chat` as the primary synthesizer with targeted lookups in parallel:
 
 ```python
-# Fire together
+# Day review — chat synthesizes, user_activity supplements
+chat(message="What did I work on today?")          # primary: synthesis
+user_activity(start_date="2026-01-08", ...)        # supplement: activity log
+
+# Meeting prep — chat synthesizes, targeted tools supplement
 chat(message="Prep me for my Acme meeting")        # primary: synthesis
-meeting_lookup(query="Acme after:now-1w")          # supplement: recent meetings
+meeting_lookup(query="Acme after:yesterday")       # supplement: recent meetings
 employee_search(query="Jane Smith")                # supplement: contact info
 ```
 
