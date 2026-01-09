@@ -1,0 +1,17 @@
+{
+  "name": "glean-mcp",
+  "version": "2.2.0",
+  "description": "Routes all Glean tool usage. Always start with chat for synthesis; add specialized tools in parallel as needed.",
+  "author": {
+    "name": "Kenneth Cavanagh",
+    "email": "ken.cavanagh@glean.com"
+  },
+  "repository": "https://github.com/ken-cavanagh-glean/fieldkit",
+  "license": "MIT",
+  "keywords": [
+    "glean",
+    "mcp",
+    "enterprise-search",
+    "knowledge-management"
+  ]
+}

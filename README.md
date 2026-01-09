@@ -2,7 +2,7 @@
 
 Agent skills toolkit for Glean field teams.
 
-**Current Version:** 2.1.0
+**Current Version:** 2.2.0
 
 ## What Are Skills?
 
@@ -45,6 +45,14 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 ---
 
 ## Changelog
+
+### v2.2.0 (2026-01-09)
+
+- Added PreToolUse hook to enforce chat-first routing
+- Hook intercepts specialized Glean tools (search, user_activity, meeting_lookup, etc.)
+- Uses prompt-based hook to check if chat was already called
+- Denies tool use if chat wasn't called first, with guidance to use chat as primary
+- Created plugin.json for proper plugin structure
 
 ### v2.1.0 (2026-01-08)
 
