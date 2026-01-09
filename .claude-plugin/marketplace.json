@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "glean-mcp",
-      "source": "./",
+      "source": "./plugins/glean-mcp",
       "description": "Use Glean MCP as the primary search and knowledge tool for enterprise context",
       "strict": false,
       "keywords": ["glean", "enterprise-search", "mcp", "knowledge-management"],
@@ -15,7 +15,7 @@
     },
     {
       "name": "context-engineering",
-      "source": "./",
+      "source": "./plugins/context-engineering",
       "description": "Production-grade skills for context engineering and agent systems",
       "strict": false,
       "keywords": ["context-engineering", "agent-skills", "multi-agent", "memory-systems"],
@@ -23,7 +23,7 @@
     },
     {
       "name": "browser-automation",
-      "source": "./",
+      "source": "./plugins/browser-automation",
       "description": "Guidance for effective browser automation with dev-browser plugin",
       "strict": false,
       "keywords": ["browser", "automation", "testing", "dev-browser"],
@@ -32,6 +32,6 @@
   ],
   "metadata": {
     "description": "Agent skills toolkit for Glean field teams",
-    "version": "1.1.0"
+    "version": "2.1.0"
   }
 }
