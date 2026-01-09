@@ -16,15 +16,13 @@ Specialized tools are appropriate in two cases:
 1. **User explicitly requests them** — e.g., "look up Jane Smith's contact info" → `employee_search`
 2. **Running in parallel with chat** — to supplement with targeted data
 
-### The Anti-Pattern
+### Synthesis Questions → Chat
 
-Do NOT skip chat by pattern-matching query keywords to tool names:
-- ❌ "What meetings do I have?" → meeting_lookup
-- ❌ "Any emails I missed?" → gmail_search
-- ❌ "What did I work on?" → user_activity
-- ❌ "Review my day" → user_activity + meeting_lookup
-
-These questions need synthesis. Start with `chat`.
+These questions need synthesis. Always route them to `chat`:
+- ✅ "What meetings do I have?" → chat
+- ✅ "Any emails I missed?" → chat
+- ✅ "What did I work on?" → chat
+- ✅ "Review my day" → chat (with user_activity in parallel)
 
 ### Parallel Pattern
 

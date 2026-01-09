@@ -46,6 +46,11 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 ## Changelog
 
+### v1.3.3 (2026-01-08)
+
+- Replaced anti-patterns (❌) with positive routing examples (✅)
+- Semantic signals now reinforce chat association, not tool names
+
 ### v1.3.2 (2026-01-08)
 
 - Added "Review my day" to anti-pattern examples
