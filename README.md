@@ -46,6 +46,11 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 ## Changelog
 
+### v1.3.4 (2026-01-08)
+
+- Expanded routing examples to show full parallel tool combinations
+- Table format: "Review my day" → `chat` + `user_activity` + `meeting_lookup`
+
 ### v1.3.3 (2026-01-08)
 
 - Replaced anti-patterns (❌) with positive routing examples (✅)

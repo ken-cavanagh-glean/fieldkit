@@ -16,13 +16,17 @@ Specialized tools are appropriate in two cases:
 1. **User explicitly requests them** — e.g., "look up Jane Smith's contact info" → `employee_search`
 2. **Running in parallel with chat** — to supplement with targeted data
 
-### Synthesis Questions → Chat
+### Synthesis Questions → Chat + Parallel Tools
 
-These questions need synthesis. Always route them to `chat`:
-- ✅ "What meetings do I have?" → chat
-- ✅ "Any emails I missed?" → chat
-- ✅ "What did I work on?" → chat
-- ✅ "Review my day" → chat (with user_activity in parallel)
+These questions need synthesis. Route to `chat` as primary, with targeted tools in parallel:
+
+| Query | Tools to Fire Together |
+|-------|------------------------|
+| "What meetings do I have?" | `chat` + `meeting_lookup` |
+| "Any emails I missed?" | `chat` + `gmail_search` |
+| "What did I work on?" | `chat` + `user_activity` |
+| "Review my day" | `chat` + `user_activity` + `meeting_lookup` |
+| "Prep for my Acme meeting" | `chat` + `meeting_lookup` + `employee_search` |
 
 ### Parallel Pattern
 
