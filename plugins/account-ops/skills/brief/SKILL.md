@@ -40,12 +40,23 @@ Extract:
 
 ### Step 3: Query Glean Account Status Agent
 
-Call the Glean agent using `mcp__glean_chat__chat`:
+Run the agent query script to call the Account Status Agent directly via the Glean API:
 
-```python
-mcp__glean_chat__chat(
-    message="Account Status for: {account name}"
-)
+```bash
+python ${CLAUDE_PLUGIN_ROOT}/scripts/query_account_status.py "{account name}"
+```
+
+**Required environment variables:**
+- `GLEAN_API_TOKEN` — API token for Glean
+- `GLEAN_INSTANCE` — Glean instance (defaults to `scio-prod`)
+
+The script returns JSON with:
+```json
+{
+  "account": "Snap",
+  "status": "...",
+  "sources": [{"title": "...", "url": "..."}]
+}
 ```
 
 The agent returns:
@@ -55,7 +66,7 @@ The agent returns:
 4. **Internal Flags** — concerns flagged by AE/DEM/Support in internal channels
 5. **Hours** — hours used vs. remaining from Rocketlane
 
-**Agent ID (for reference):** `ccdc8e55722e48f98ef04d548f2b7e58`
+**Agent ID:** `ccdc8e55722e48f98ef04d548f2b7e58`
 
 ### Step 4: Synthesize Briefing
 
