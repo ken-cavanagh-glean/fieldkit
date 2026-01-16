@@ -1,3 +1,6 @@
 {
-  "name": "account-ops"
+  "name": "account-ops",
+  "description": "Account operations for AIOMs. Quick status briefings, checklist tracking, and pre-meeting prep.",
+  "version": "1.0.0",
+  "skills": "./skills/"
 }
