@@ -29,6 +29,14 @@
       "strict": false,
       "keywords": ["browser", "automation", "testing", "dev-browser"],
       "skills": ["./skills/browser-automation"]
+    },
+    {
+      "name": "account-ops",
+      "source": "./plugins/account-ops",
+      "description": "Account operations for AIOMs. Quick status briefings, checklist tracking, and pre-meeting prep.",
+      "strict": false,
+      "keywords": ["account", "briefing", "status", "aiom", "customer-success"],
+      "skills": ["./skills/brief"]
     }
   ],
   "metadata": {
