@@ -1,5 +1,6 @@
 {
   "name": "fieldkit",
+  "description": "Agent skills toolkit for Glean field teams",
   "owner": {
     "name": "Glean Field Engineering",
     "email": "kenneth.cavanagh@glean.com"
@@ -9,38 +10,29 @@
       "name": "glean-mcp",
       "source": "./plugins/glean-mcp",
       "description": "Your work knowledge agent. Use Glean chat to answer any question about the user's company, accounts, colleagues, meetings, documents, or work history.",
-      "strict": false,
-      "keywords": ["glean", "enterprise-graph", "company-search", "people-search", "work-activity", "oracle"],
-      "skills": ["./skills/glean-mcp"],
-      "commands": ["./commands/setup-glean-chat-mcp.md"]
+      "category": "productivity",
+      "keywords": ["glean", "enterprise-graph", "company-search", "people-search", "work-activity", "oracle"]
     },
     {
       "name": "context-engineering",
       "source": "./plugins/context-engineering",
       "description": "Production-grade skills for context engineering and agent systems",
-      "strict": false,
-      "keywords": ["context-engineering", "agent-skills", "multi-agent", "memory-systems"],
-      "skills": ["./skills/context-engineering"]
+      "category": "development",
+      "keywords": ["context-engineering", "agent-skills", "multi-agent", "memory-systems"]
     },
     {
       "name": "browser-automation",
       "source": "./plugins/browser-automation",
       "description": "Guidance for effective browser automation with dev-browser plugin",
-      "strict": false,
-      "keywords": ["browser", "automation", "testing", "dev-browser"],
-      "skills": ["./skills/browser-automation"]
+      "category": "development",
+      "keywords": ["browser", "automation", "testing", "dev-browser"]
     },
     {
       "name": "account-ops",
       "source": "./plugins/account-ops",
       "description": "Account operations for AIOMs. Quick status briefings, checklist tracking, and pre-meeting prep.",
-      "strict": false,
-      "keywords": ["account", "briefing", "status", "aiom", "customer-success"],
-      "skills": ["./skills/brief"]
+      "category": "productivity",
+      "keywords": ["account", "briefing", "status", "aiom", "customer-success"]
     }
-  ],
-  "metadata": {
-    "description": "Agent skills toolkit for Glean field teams",
-    "version": "3.0.0"
-  }
+  ]
 }
