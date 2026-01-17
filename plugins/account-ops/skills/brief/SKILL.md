@@ -43,7 +43,7 @@ Extract:
 Run the agent query script to call the Account Status Agent directly via the Glean API:
 
 ```bash
-python ${CLAUDE_PLUGIN_ROOT}/scripts/query_account_status.py "{account name}"
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/query_account_status.py "{account name}"
 ```
 
 **Required environment variables:**
