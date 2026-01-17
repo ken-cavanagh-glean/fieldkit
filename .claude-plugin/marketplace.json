@@ -33,6 +33,13 @@
       "description": "Account operations for AIOMs. Quick status briefings, checklist tracking, and pre-meeting prep.",
       "category": "productivity",
       "keywords": ["account", "briefing", "status", "aiom", "customer-success"]
+    },
+    {
+      "name": "agent-builder",
+      "source": "./plugins/agent-builder",
+      "description": "Design and generate Glean Agent specifications. Create agent specs, generate importable JSON, and document agent workflows.",
+      "category": "development",
+      "keywords": ["agent", "glean-agent", "agent-builder", "workflow", "automation", "spec-generator"]
     }
   ]
 }
