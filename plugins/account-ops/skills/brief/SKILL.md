@@ -40,10 +40,13 @@ Extract:
 
 ### Step 3: Query Glean Account Status Agent
 
-Run the agent query script to call the Account Status Agent directly via the Glean API:
+Run the agent query script to call the Account Status Agent directly via the Glean API.
+
+**IMPORTANT:** The Glean Agent API takes 60-90 seconds to respond (it runs multiple searches + LLM synthesis). You MUST set a 120-second timeout:
 
 ```bash
 python3 ${CLAUDE_PLUGIN_ROOT}/scripts/query_account_status.py "{account name}"
+# Use timeout: 120000 (milliseconds) when calling via Bash tool
 ```
 
 **Required environment variables:**
