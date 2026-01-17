@@ -2,7 +2,9 @@
 
 Agent skills toolkit for Glean field teams.
 
-**Current Version:** 3.0.0
+**Current Version:** 0.4.0 (beta)
+
+> **Note:** This is pre-1.0 software. Expect breaking changes as we experiment with APIs and skill structures.
 
 ## What Are Skills?
 
@@ -16,6 +18,8 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 # 2. Install the skills you want
 /plugin install glean-mcp@fieldkit
+/plugin install account-ops@fieldkit
+/plugin install agent-builder@fieldkit
 /plugin install context-engineering@fieldkit
 /plugin install browser-automation@fieldkit
 
@@ -33,6 +37,8 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 | Skill | Description | Credit |
 |-------|-------------|--------|
 | **glean-mcp** | Your work knowledge agent — ask Glean about company, accounts, colleagues, meetings, docs | Glean Field Engineering |
+| **account-ops** | AIOM account operations — `/brief {account}` for pre-meeting briefings combining local notes + Glean agent | Glean Field Engineering |
+| **agent-builder** | Design and generate Glean Agent specs — interview flow, JSON schema, 85+ actions catalog | Glean Field Engineering |
 | **context-engineering** | Educational skill for agent design, debugging, and context management | [Muratcan Koylan](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering) |
 | **browser-automation** | Guidance for effective browser automation with dev-browser | Glean Field Engineering |
 
@@ -46,7 +52,31 @@ Skills are instructions loaded into Claude's context that shape behavior. They'r
 
 ## Changelog
 
-### v3.0.0 (2026-01-09)
+### v0.4.0 (2026-01-16)
+
+**New plugins: account-ops and agent-builder**
+
+- **account-ops:** AIOM account operations plugin
+  - `/brief {account}` — Pre-meeting briefing combining local entity notes + Glean Account Status Agent
+  - Calls Glean Agent API directly via Python script
+  - Auto-loads credentials from shared `.env` file
+
+- **agent-builder:** Glean Agent specification generator
+  - Interview-driven workflow to design agents
+  - Complete JSON schema documentation (reverse-engineered from 6 agents)
+  - 85+ actions catalog across Salesforce, Slack, Jira, Google Workspace, etc.
+  - Generates valid importable JSON + human-readable markdown specs
+
+**Infrastructure fixes:**
+- Fixed marketplace structure causing auto-install on marketplace add
+- Removed nested `plugin.json` files from plugin source directories
+- Documented plugin troubleshooting learnings
+
+**Version reset:** Moved from v3.0.0 to v0.4.0 to reflect beta status. Pre-1.0 = experimental.
+
+---
+
+### v0.3.0 (2026-01-09) — formerly v3.0.0
 
 **Breaking change: Chat-only oracle mode**
 
