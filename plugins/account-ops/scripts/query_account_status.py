@@ -73,10 +73,11 @@ def query_account_status(account_name: str) -> dict:
     try:
         with Glean(api_token=api_token, instance=glean_instance) as client:
             # Call the agent
+            # Match the agent's input field name exactly
             run_response = client.client.agents.run(
                 agent_id=AGENT_ID,
                 input={
-                    "question": f"Account Status for: {account_name}"
+                    "Account Name": account_name
                 }
             )
 
